@@ -79,11 +79,11 @@ class FavoritesScreen extends StatelessWidget {
         padding:
         EdgeInsets.symmetric(horizontal: width / 20, vertical: height / 50),
         decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-                color: Theme.of(context).primaryColor.withOpacity(0.1),
+                color: Theme.of(context).shadowColor.withOpacity(0.1),
                 spreadRadius: 1.5,
                 blurRadius: 1,
                 offset: Offset(0, 1))

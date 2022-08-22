@@ -39,7 +39,7 @@ class TrashScreen extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.headline4!.copyWith(
                               fontSize: 16,
-                          color: Theme.of(context).primaryColor,
+                              color: Theme.of(context).primaryColor,
                             ),
                       ),
                     ],
@@ -79,11 +79,11 @@ class TrashScreen extends StatelessWidget {
         padding:
             EdgeInsets.symmetric(horizontal: width / 20, vertical: height / 50),
         decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-                color: Theme.of(context).primaryColor.withOpacity(0.1),
+                color: Theme.of(context).shadowColor.withOpacity(0.1),
                 spreadRadius: 1.5,
                 blurRadius: 1,
                 offset: Offset(0, 1))
@@ -136,39 +136,39 @@ class TrashScreen extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   builder: (context) => Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20),),
-                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                      color: Theme.of(context).backgroundColor,
                     ),
                     height: height / 6,
                     alignment: Alignment.center,
-                    margin: EdgeInsets.symmetric(horizontal: width / 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(height: height / 80),
                         Text(
-                          'move ${note.title} Forever ?',
+                          'Delete ${note.title} Forever ?',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context)
                               .textTheme
                               .headline4!
                               .merge(TextStyle(
-                            fontSize: 16,
-                          )),
+                                fontSize: 16,
+                              )),
                         ),
                         SizedBox(height: height / 80),
                         InkWell(
                           onTap: () {
-                            NotesCubit.get(context)
-                                .deleteData(id: note.id!);
+                            NotesCubit.get(context).deleteData(id: note.id!);
                             Navigator.pop(context);
                           },
                           borderRadius: BorderRadius.circular(100),
                           child: CircleAvatar(
                             radius: height / 25,
-                            foregroundColor:
-                            Theme.of(context).iconTheme.color,
+                            foregroundColor: Theme.of(context).iconTheme.color,
                             backgroundColor: CircleButtonColors.del,
                             child: Icon(Icons.delete_outline_rounded,
                                 size: height / 20),

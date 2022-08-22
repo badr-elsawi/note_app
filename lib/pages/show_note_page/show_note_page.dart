@@ -88,12 +88,14 @@ class ShowNoteScreen extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         builder: (context) => Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20),),
-                            color: Theme.of(context).scaffoldBackgroundColor,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                            ),
+                            color: Theme.of(context).backgroundColor,
                           ),
                           height: height / 6,
                           alignment: Alignment.center,
-                          margin: EdgeInsets.symmetric(horizontal: width / 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -126,7 +128,8 @@ class ShowNoteScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(100),
                                 child: CircleAvatar(
                                   radius: height / 25,
-                                  foregroundColor: Theme.of(context).iconTheme.color,
+                                  foregroundColor:
+                                      Theme.of(context).iconTheme.color,
                                   backgroundColor: CircleButtonColors.delete,
                                   child: Icon(Icons.delete_outline_rounded,
                                       size: height / 20),

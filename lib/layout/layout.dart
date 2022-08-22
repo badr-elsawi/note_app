@@ -9,6 +9,7 @@ import 'package:notey/pages/favorites_page/favorites_page.dart';
 import 'package:notey/pages/show_note_page/show_note_page.dart';
 import 'package:notey/pages/trash_page/trash_page.dart';
 import 'package:notey/shared/components/components.dart';
+import 'package:notey/shared/cubit/app_cubit.dart';
 import 'package:notey/shared/styles/styles.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -161,7 +162,7 @@ class Home extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-              color: Theme.of(context).primaryColor.withOpacity(0.3),
+              color: Theme.of(context).shadowColor.withOpacity(0.3),
               spreadRadius: 1.5,
               blurRadius: 1,
               offset: Offset(0, 1))
@@ -212,12 +213,15 @@ class Home extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     builder: (context) => Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20),),
-                        color: Theme.of(context).scaffoldBackgroundColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                        color: Theme.of(context).backgroundColor,
                       ),
                       height: height / 6,
                       alignment: Alignment.center,
-                      margin: EdgeInsets.symmetric(horizontal: width / 20),
+                      //margin: EdgeInsets.symmetric(horizontal: width / 20),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -230,8 +234,8 @@ class Home extends StatelessWidget {
                                 .textTheme
                                 .headline4!
                                 .merge(TextStyle(
-                              fontSize: 16,
-                            )),
+                                  fontSize: 16,
+                                )),
                           ),
                           SizedBox(height: height / 80),
                           InkWell(
@@ -248,7 +252,7 @@ class Home extends StatelessWidget {
                             child: CircleAvatar(
                               radius: height / 25,
                               foregroundColor:
-                              Theme.of(context).iconTheme.color,
+                                  Theme.of(context).iconTheme.color,
                               backgroundColor: CircleButtonColors.delete,
                               child: Icon(Icons.delete_outline_rounded,
                                   size: height / 20),
@@ -370,7 +374,7 @@ class Home extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).primaryColor.withOpacity(0.3),
+              color: Theme.of(context).shadowColor.withOpacity(0.3),
               spreadRadius: 1.5,
               blurRadius: 1,
               offset: Offset(0, 1),
@@ -426,12 +430,14 @@ class Home extends StatelessWidget {
                         backgroundColor: Colors.transparent,
                         builder: (context) => Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20),),
-                            color: Theme.of(context).scaffoldBackgroundColor,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                            ),
+                            color: Theme.of(context).backgroundColor,
                           ),
                           height: height / 6,
                           alignment: Alignment.center,
-                          margin: EdgeInsets.symmetric(horizontal: width / 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -581,8 +587,13 @@ class Home extends StatelessWidget {
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(horizontal: 0, vertical: height / 3),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: BorderRadiusDirectional.only(
+          bottomStart: Radius.circular(0),
+          topStart: Radius.circular(0),
+          bottomEnd: Radius.circular(20),
+          topEnd: Radius.circular(20),
+        ),
+        color: Theme.of(context).backgroundColor,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -599,7 +610,10 @@ class Home extends StatelessWidget {
             },
             focusColor: Theme.of(context).primaryColor,
             hoverColor: Theme.of(context).primaryColor,
-            leading: Icon(Icons.delete_rounded),
+            leading: Icon(
+              Icons.delete_rounded,
+              color: Theme.of(context).primaryColor,
+            ),
             title: Text(
               'Trash',
               style: Theme.of(context).textTheme.headline4!.merge(
@@ -611,13 +625,14 @@ class Home extends StatelessWidget {
             trailing: getTrash(NotesCubit.get(context).notes).length == 0
                 ? null
                 : CircleAvatar(
-                    foregroundColor: Colors.white,
+                    foregroundColor:
+                        Theme.of(context).textTheme.headline6!.color,
                     backgroundColor: Theme.of(context).primaryColor,
                     child: Text(
                       '${getTrash(NotesCubit.get(context).notes).length}',
-                      style: Theme.of(context).textTheme.headline4!.copyWith(
-                            color: Colors.white,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
                             fontSize: 15,
+                            color: Theme.of(context).textTheme.headline6!.color,
                           ),
                     ),
                   ),
@@ -634,10 +649,13 @@ class Home extends StatelessWidget {
             },
             focusColor: Theme.of(context).primaryColor,
             hoverColor: Theme.of(context).primaryColor,
-            leading: Icon(Icons.favorite_rounded),
+            leading: Icon(
+              Icons.favorite_rounded,
+              color: Theme.of(context).primaryColor,
+            ),
             title: Text(
               'Favorites',
-              style: Theme.of(context).textTheme.headline4!.merge(
+              style: Theme.of(context).textTheme.bodyText1!.merge(
                     TextStyle(
                       fontSize: 16,
                     ),
@@ -646,16 +664,42 @@ class Home extends StatelessWidget {
             trailing: getFavs(NotesCubit.get(context).notes).length == 0
                 ? null
                 : CircleAvatar(
-                    foregroundColor: Colors.white,
+                    foregroundColor:
+                        Theme.of(context).textTheme.headline6!.color,
                     backgroundColor: Theme.of(context).primaryColor,
                     child: Text(
                       '${getFavs(NotesCubit.get(context).notes).length}',
                       style: Theme.of(context).textTheme.headline4!.copyWith(
-                            color: Colors.white,
+                            color: Theme.of(context).textTheme.headline6!.color,
                             fontSize: 15,
                           ),
                     ),
                   ),
+          ),
+          Divider(),
+          ListTile(
+            focusColor: Theme.of(context).primaryColor,
+            hoverColor: Theme.of(context).primaryColor,
+            leading: Icon(
+              Icons.dark_mode_rounded,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text(
+              'Dark Theme',
+              style: Theme.of(context).textTheme.bodyText1!.merge(
+                    TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+            ),
+            trailing: Switch.adaptive(
+              value: AppCubit.get(context).isDark,
+              activeColor: Colors.white,
+              activeTrackColor: Colors.green,
+              onChanged: (bool j) {
+                AppCubit.get(context).switchTheme();
+              },
+            ),
           ),
         ],
       ),

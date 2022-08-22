@@ -23,6 +23,7 @@ Widget textInput({
     readOnly: readOnly,
     textInputAction: textInputAction,
     //***********************
+    style: Theme.of(context).textTheme.bodyText1,
     decoration: InputDecoration(
       hintText: hint,
       hintStyle: Theme.of(context).textTheme.caption,
@@ -32,21 +33,21 @@ Widget textInput({
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: BorderSide(
-          width: 2,
+          width: 1,
           color: Theme.of(context).primaryColor,
         ),
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: BorderSide(
-          width: 2,
+          width: 1,
           color: Theme.of(context).primaryColor,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: BorderSide(
-          width: 2,
+          width: 1,
           color: Theme.of(context).primaryColor,
         ),
       ),
