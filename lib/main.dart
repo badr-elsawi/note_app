@@ -11,7 +11,6 @@ import 'package:notey/shared/styles/styles.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CashService.init();
-
   bool? c = CashService.getBool(key: 'isDark');
   runApp(MyApp(c));
 }
