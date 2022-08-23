@@ -115,8 +115,12 @@ class ShowNoteScreen extends StatelessWidget {
                               InkWell(
                                 onTap: () {
                                   cubit.swichTrash(model.id!, model.trash!);
-                                  cubit.swichFav(model.id!, model.fav!);
-                                  cubit.swichPin(model.id!, model.pin!);
+                                  if (model.pin == 1) {
+                                    cubit.swichPin(model.id!, model.pin!);
+                                  }
+                                  if (model.fav == 1) {
+                                    cubit.swichFav(model.id!, model.fav!);
+                                  }
                                   Navigator.pushReplacement(
                                     context,
                                     PageTransition(

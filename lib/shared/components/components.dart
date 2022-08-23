@@ -33,21 +33,21 @@ Widget textInput({
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: BorderSide(
-          width: 1,
+          width: 0.2,
           color: Theme.of(context).primaryColor,
         ),
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: BorderSide(
-          width: 1,
+          width: 0.2,
           color: Theme.of(context).primaryColor,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: BorderSide(
-          width: 1,
+          width: 0.2,
           color: Theme.of(context).primaryColor,
         ),
       ),

@@ -21,4 +21,19 @@ class CashService {
     print('data fetched **************************************************');
     return sharedPreferences.getBool(key);
   }
+
+  static Future<bool> setInt({
+    required String key,
+    required int value,
+  }) async {
+    print('data cashed **************************************************');
+    return await sharedPreferences.setInt(key, value);
+  }
+
+  static int? getInt({
+    required String key,
+  }) {
+    print('data fetched **************************************************');
+    return sharedPreferences.getInt(key);
+  }
 }

@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
     'Education',
   ];
   String category = 'All';
-
+  int color = AppCubit.color;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -242,10 +242,14 @@ class Home extends StatelessWidget {
                             onTap: () {
                               NotesCubit.get(context)
                                   .swichTrash(note.id!, note.trash!);
-                              NotesCubit.get(context)
-                                  .swichPin(note.id!, note.pin!);
-                              NotesCubit.get(context)
-                                  .swichFav(note.id!, note.pin!);
+                              if (note.pin == 1) {
+                                NotesCubit.get(context)
+                                    .swichPin(note.id!, note.pin!);
+                              }
+                              if (note.fav == 1) {
+                                NotesCubit.get(context)
+                                    .swichFav(note.id!, note.fav!);
+                              }
                               Navigator.pop(context);
                             },
                             borderRadius: BorderRadius.circular(100),
@@ -458,10 +462,14 @@ class Home extends StatelessWidget {
                                 onTap: () {
                                   NotesCubit.get(context)
                                       .swichTrash(note.id!, note.trash!);
-                                  NotesCubit.get(context)
-                                      .swichPin(note.id!, note.pin!);
-                                  NotesCubit.get(context)
-                                      .swichFav(note.id!, note.pin!);
+                                  if (note.pin == 1) {
+                                    NotesCubit.get(context)
+                                        .swichPin(note.id!, note.pin!);
+                                  }
+                                  if (note.fav == 1) {
+                                    NotesCubit.get(context)
+                                        .swichFav(note.id!, note.fav!);
+                                  }
                                   Navigator.pop(context);
                                 },
                                 borderRadius: BorderRadius.circular(100),
@@ -701,8 +709,47 @@ class Home extends StatelessWidget {
               },
             ),
           ),
+          SizedBox(height: height / 100),
+          Container(
+            height: height / 20,
+            child: ListView.separated(
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => _colorItem(
+                AppCubit.get(context).colors[index],
+                context,
+                height,
+                width,
+              ),
+              separatorBuilder: (context, index) =>
+                  SizedBox(width: width / 20),
+              itemCount: AppCubit.get(context).colors.length,
+            ),
+          ),
         ],
       ),
     );
   }
+
+  Widget _colorItem(
+      int c,
+      BuildContext context,
+      double h,
+      double w,
+      ) {
+    return IconButton(
+      onPressed: () async {
+        color = await AppCubit.get(context).changeColor(c);
+      },
+      iconSize: h / 40,
+      padding: EdgeInsets.all(0),
+      icon: CircleAvatar(
+        radius: h / 25,
+        backgroundColor: Color(c),
+        foregroundColor: Colors.black,
+        child: c == color ? Icon(Icons.check) : SizedBox(),
+      ),
+    );
+  }
+
 }

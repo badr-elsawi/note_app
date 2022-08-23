@@ -12,27 +12,36 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CashService.init();
   bool? c = CashService.getBool(key: 'isDark');
-  runApp(MyApp(c));
+  int? co = CashService.getInt(key: 'color');
+  Color cc = co == null ? Color(0xfff5aeae) : Color(co);
+  runApp(MyApp(c, cc));
 }
 
 class MyApp extends StatelessWidget {
   bool? isDark;
-  MyApp(this.isDark);
+  Color? myColor;
+
+  MyApp(this.isDark, this.myColor);
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => AppCubit()..getTheme(isDark)),
-        BlocProvider(create: (BuildContext context) => NotesCubit()..readData()),
+        BlocProvider(
+            create: (BuildContext context) => AppCubit()
+              ..getTheme(isDark)
+              ..changeColor(myColor!.value)),
+        BlocProvider(
+            create: (BuildContext context) => NotesCubit()..readData()),
       ],
-      child: BlocConsumer<AppCubit,AppStates>(
-        listener: (context,state){},
-        builder: (context,state){
-          var cubit = AppCubit.get(context) ;
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = AppCubit.get(context);
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: lightTheme,
-            darkTheme: darkTheme,
+            darkTheme: cubit.myTheme,
             themeMode: cubit.isDark ? ThemeMode.dark : ThemeMode.light,
             title: 'notes app',
             home: Home(),
